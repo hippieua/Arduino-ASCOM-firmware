@@ -27,8 +27,8 @@ unsigned long last_move_time;
 byte res 		= 1;		// 1,2,4,8,16,32
 byte res_prev		= 1;		// 1,2,4,8,16,32
 
-AccelStepper stepper(1, A2, A3);		// pin A2 = step, pin A3 = direction
-SerialCommand sCmd;						// The SerialCommand object
+AccelStepper stepper(1, A2, A3);	// pin A2 = step, pin A3 = direction
+SerialCommand sCmd;			// The SerialCommand object
 
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
