@@ -1,35 +1,31 @@
 #include <AccelStepper.h>		// Библиотека управления ШД
 #include <SerialCommand.h>		// Читаем ком порт как строки с параметрами
 #include <OneWire.h>			//
-#include <DallasTemperature.h>  // 1W For DS18B20 Temp sensor
+#include <DallasTemperature.h>          // 1W For DS18B20 Temp sensor
 
 #define ONE_WIRE_BUS	11
-#define M0				8		// Control Driver resolution
-#define M1				7		// Control Driver resolution
-#define SLEEP			4		// Control Driver ENABLE \ DISABLE
-
+#define M0		8		// Control Driver resolution
+#define M1		7		// Control Driver resolution
+#define SLEEP		4		// Control Driver ENABLE \ DISABLE
 
 #define DEVICE_RESPONSE "Arduino.Open.Focuser"	// must be equal to DEVICE_RESPONSE in Driver.vb
 
 long e_pos;
-long mov 					= 0;		// Current Position
+long mov 		= 0;		// Current Position
 long set_current_pos;
 
-bool is_mov					= false;	// IsMoving False or True
-bool sleep_state			= false;
+bool is_mov		= false;	// IsMoving False or True
+bool sleep_state	= false;
 
-double temp;							// Temperature
+double temp;				// Temperature
 
-unsigned int  spd			= 2000;		// Default Speed
-unsigned int  accel 		= 500;		// Default Acceleration
-unsigned int  sleep_delay  	= 60;			// Set sleep delay in sec
+unsigned int  spd	 = 2000;	// Default Speed
+unsigned int  accel 	  = 500;	// Default Acceleration
+unsigned int  sleep_delay = 60;		// Set sleep delay in sec
 unsigned long last_move_time;
 
-byte res 					= 1;		// 1,2,4,8,16,32
-byte res_prev				= 1;		// 1,2,4,8,16,32
-
-
-
+byte res 		= 1;		// 1,2,4,8,16,32
+byte res_prev		= 1;		// 1,2,4,8,16,32
 
 AccelStepper stepper(1, A2, A3);		// pin A2 = step, pin A3 = direction
 SerialCommand sCmd;						// The SerialCommand object
@@ -40,36 +36,36 @@ DallasTemperature sensors(&oneWire);
 void setup()
 {
 	pinMode(SLEEP, OUTPUT);
-	Serial.begin(9600);						// Com порт на 9600  
+	Serial.begin(9600);			// Com порт на 9600  
 	sensors.begin();                    	// Turn on temp sensors
-	digitalWrite(SLEEP, HIGH);				// Enable SM
+	digitalWrite(SLEEP, HIGH);		// Enable SM
 	setresolution();                    	// Set SM resolution
-	stepper.setMaxSpeed(spd);				// Set SM Speed (ips)
-	stepper.setAcceleration(accel);			// Set SM Acceleration
+	stepper.setMaxSpeed(spd);		// Set SM Speed (ips)
+	stepper.setAcceleration(accel);		// Set SM Acceleration
 
-	sCmd.addCommand("#", HelloHS);			// not_used: Hello and check DEVICE_RESPONSE
-	sCmd.addCommand("S", SetSpeed);			// Speed management
-	sCmd.addCommand("A", SetAccel);			// Acceleration management
-	sCmd.addCommand("M", moveSM);			// Move command
+	sCmd.addCommand("#", HelloHS);		// not_used: Hello and check DEVICE_RESPONSE
+	sCmd.addCommand("S", SetSpeed);		// Speed management
+	sCmd.addCommand("A", SetAccel);		// Acceleration management
+	sCmd.addCommand("M", moveSM);		// Move command
 	sCmd.addCommand("T", getTemp);	    	// Read temp
 	sCmd.addCommand("H", setHalt);	    	// Halp SM
-	sCmd.addCommand("I", getIsMov);			// Is SM moving true \ false
+	sCmd.addCommand("I", getIsMov);		// Is SM moving true \ false
 	sCmd.addCommand("P", getPos);	    	// Current Position
-	sCmd.addCommand("E", enblSM);			// not_used: Re-enable SM manualy 
-	sCmd.addCommand("D", dsblSM);			// not_used: Disable SM manualy
-	sCmd.addCommand("B", setRes);			// Set SM resolution
-	sCmd.addCommand("R", setPos);			// Set SM
-	sCmd.addCommand("Q", getPosE);			// Read SM prev position from EEPROM
-	sCmd.addCommand("C", setDisTime);		// Set sleep delay in sec
-	sCmd.addCommand("HELP", sendHelp);		// Set sleep delay in sec
+	sCmd.addCommand("E", enblSM);		// not_used: Re-enable SM manualy 
+	sCmd.addCommand("D", dsblSM);		// not_used: Disable SM manualy
+	sCmd.addCommand("B", setRes);		// Set SM resolution
+	sCmd.addCommand("R", setPos);		// Set SM
+	sCmd.addCommand("Q", getPosE);		// Read SM prev position from EEPROM
+	sCmd.addCommand("C", setDisTime);	// Set sleep delay in sec
+	sCmd.addCommand("HELP", sendHelp);	// Set sleep delay in sec
 	sCmd.setDefaultHandler(unrecognized);	// All other: send ERR
-	Serial.println("# Ready #");			// ... and we are ready
+	Serial.println("# Ready #");		// ... and we are ready
 }
 
 void loop()
 {
-	sCmd.readSerial();						// 1st: read input from com port
-	stepper_run();							// 3rd: let's go
+	sCmd.readSerial();			// 1st: read input from com port
+	stepper_run();				// 3rd: let's go
 	if(sleep_delay > 0){                    // If sleep delay is on, waitng for last_move_time - current time > sleep_delay
 		check_time();			
 	}
