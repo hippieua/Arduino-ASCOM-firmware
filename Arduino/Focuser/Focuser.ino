@@ -296,18 +296,18 @@ void check_time(){
 	}
 }
 void sendHelp(){
-	Serial.println('# - Hello and check DEVICE_RESPONSE');
-	Serial.println('S + Value - Speed management');
-	Serial.println('A + Value - Acceleration management');
-	Serial.println('M + Value - Move command');
-	Serial.println('T - Read temp');
-	Serial.println('H - Halp SM');
-	Serial.println('I - Is SM moving true or false');
-	Serial.println('P - Current Position');
-	Serial.println('E - not_used: Re-enable SM manualy ');
-	Serial.println('D - not_used: Disable SM manualy');
-	Serial.println('B + Value - Set SM resolution');
-	Serial.println('R + Value - Set SM position');
-	Serial.println('Q - Read SM prev position from EEPROM');
-	Serial.println('C - Set sleep delay in sec');
+	Serial.println("# - Hello and check DEVICE_RESPONSE");
+	Serial.println("S + Value - Speed management");
+	Serial.println("A + Value - Acceleration management");
+	Serial.println("M + Value - Move command");
+	Serial.println("T - Read temp");
+	Serial.println("H - Halp SM");
+	Serial.println("I - Is SM moving true or false");
+	Serial.println("P - Current Position");
+	Serial.println("E - not_used: Re-enable SM manualy");
+	Serial.println("D - not_used: Disable SM manualy");
+	Serial.println("B + Value - Set SM resolution");
+	Serial.println("R + Value - Set SM position");
+	Serial.println("Q - Read SM prev position from EEPROM");
+	Serial.println("C - Set sleep delay in sec");
 }
