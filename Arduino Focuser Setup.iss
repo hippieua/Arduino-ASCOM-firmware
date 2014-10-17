@@ -5,7 +5,7 @@
 [Setup]
 AppID={{d897eb8d-6040-4f0b-83c3-414177816024}
 AppName=ASCOM Arduino Focuser Focuser Driver
-AppVerName=ASCOM Arduino Focuser Focuser Driver 0.1
+AppVerName=ASCOM Arduino Focuser Focuser Driver 0.3
 AppVersion=0.1
 AppPublisher=hippie <v.v.gura@gmail.com>
 AppPublisherURL=mailto:v.v.gura@gmail.com

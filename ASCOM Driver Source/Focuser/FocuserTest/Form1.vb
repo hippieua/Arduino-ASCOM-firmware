@@ -16,16 +16,31 @@
     Private Sub buttonConnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles buttonConnect.Click
         If (IsConnected) Then
             driver.Connected = False
-            TextBox4.Text = "Disconnected"
-            Timer1.Stop()
+
+
+
+
 
         Else
             Try
                 driver = New ASCOM.DriverAccess.Focuser(My.Settings.DriverId)
 
                 driver.Connected = True
-                TextBox4.Text = "Connected"
-                Timer1.Start()
+
+
+
+                If (driver.Temperature = 0) Then
+                    Label6.Text = "Not supported"
+                Else
+                    Label6.Text = driver.Temperature
+                End If
+
+                If (driver.Absolute = True) Then
+                    Label7.Text = "Absolute"
+                Else
+                    Label7.Text = "Relative"
+                End If
+
 
 
             Catch ex As Exception
@@ -49,7 +64,12 @@
     Private Sub SetUIState()
         buttonConnect.Enabled = Not String.IsNullOrEmpty(My.Settings.DriverId)
         buttonChoose.Enabled = Not IsConnected
+        buttonSetup.Enabled = Not IsConnected
+        buttonMoveIn.Enabled = IsConnected
+        buttonMoveOut.Enabled = IsConnected
+        buttonMoveTo.Enabled = IsConnected
         buttonConnect.Text = IIf(IsConnected, "Disconnect", "Connect")
+
     End Sub
 
     ''' <summary>
@@ -67,27 +87,31 @@
         End Get
     End Property
 
-    ' TODO: Add additional UI and controls to test more of the driver being tested.
-
-    Private Sub TextBox5_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-    End Sub
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        driver.Move(NumericUpDown1.Value)
-
-
-
-
-
-
-
-
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles buttonMoveTo.Click
+        driver.Move(NUD_Absolute.Value)
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         If IsConnected Then
-            TextBox1.Text = driver.Position
+            Label5.Text = driver.Position
         End If
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles buttonSetup.Click
+        driver = New ASCOM.DriverAccess.Focuser(My.Settings.DriverId)
+        driver.SetupDialog()
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles buttonMoveOut.Click
+        driver.Move(driver.Position + NUD_Relative.Value)
+    End Sub
+
+    Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles buttonMoveIn.Click
+        Dim new_pos As Integer
+        new_pos = driver.Position - NUD_Relative.Value
+        If (new_pos < 0) Then
+            new_pos = 0
+        End If
+        driver.Move(new_pos)
     End Sub
 End Class

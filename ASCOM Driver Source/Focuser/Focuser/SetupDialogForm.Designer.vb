@@ -45,21 +45,23 @@ Partial Class SetupDialogForm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.COM1 = New System.Windows.Forms.ComboBox()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.NumericUpDown3 = New System.Windows.Forms.NumericUpDown()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.COM1 = New System.Windows.Forms.ComboBox()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
-        Me.NumericUpDown3 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown6 = New System.Windows.Forms.NumericUpDown()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.NumericUpDown4 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,11 +69,11 @@ Partial Class SetupDialogForm
         CType(Me.CompensationUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown6, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage3.SuspendLayout()
         CType(Me.NumericUpDown4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -267,6 +269,8 @@ Partial Class SetupDialogForm
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.TabPage1.Controls.Add(Me.CheckBox1)
+        Me.TabPage1.Controls.Add(Me.Label15)
         Me.TabPage1.Controls.Add(Me.Button3)
         Me.TabPage1.Controls.Add(Me.label2)
         Me.TabPage1.Controls.Add(Me.COM1)
@@ -292,6 +296,26 @@ Partial Class SetupDialogForm
         Me.Button3.Text = "Read"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'COM1
+        '
+        Me.COM1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.ASCOM.Focuser.My.MySettings.Default, "CommPort", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.COM1.FormattingEnabled = True
+        Me.COM1.Location = New System.Drawing.Point(109, 12)
+        Me.COM1.Name = "COM1"
+        Me.COM1.Size = New System.Drawing.Size(67, 21)
+        Me.COM1.TabIndex = 22
+        Me.COM1.Text = Global.ASCOM.Focuser.My.MySettings.Default.CommPort
+        '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.ASCOM.Focuser.My.MySettings.Default, "FocuserMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.NumericUpDown1.Location = New System.Drawing.Point(109, 43)
+        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(67, 20)
+        Me.NumericUpDown1.TabIndex = 8
+        Me.NumericUpDown1.Value = Global.ASCOM.Focuser.My.MySettings.Default.FocuserMax
+        '
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.WhiteSmoke
@@ -310,6 +334,48 @@ Partial Class SetupDialogForm
         Me.TabPage2.Size = New System.Drawing.Size(358, 173)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Hardware Settings"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(85, 75)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(18, 13)
+        Me.Label14.TabIndex = 28
+        Me.Label14.Text = "1/"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.ASCOM.Focuser.My.MySettings.Default, "SSize", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"1", "2", "4", "8", "16", "32"})
+        Me.ComboBox1.Location = New System.Drawing.Point(109, 72)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(55, 21)
+        Me.ComboBox1.TabIndex = 27
+        Me.ComboBox1.Text = Global.ASCOM.Focuser.My.MySettings.Default.SSize
+        Me.ToolTip1.SetToolTip(Me.ComboBox1, "StepDriver microstep config")
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(15, 75)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(62, 13)
+        Me.Label13.TabIndex = 26
+        Me.Label13.Text = "Step Config"
+        '
+        'NumericUpDown3
+        '
+        Me.NumericUpDown3.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.ASCOM.Focuser.My.MySettings.Default, "Acceleration", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.NumericUpDown3.Increment = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.NumericUpDown3.Location = New System.Drawing.Point(108, 43)
+        Me.NumericUpDown3.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.NumericUpDown3.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.NumericUpDown3.Name = "NumericUpDown3"
+        Me.NumericUpDown3.Size = New System.Drawing.Size(55, 20)
+        Me.NumericUpDown3.TabIndex = 25
+        Me.NumericUpDown3.Value = Global.ASCOM.Focuser.My.MySettings.Default.Acceleration
         '
         'Label12
         '
@@ -340,6 +406,18 @@ Partial Class SetupDialogForm
         Me.ToolTip1.SetToolTip(Me.Label9, "The desired acceleration in steps per second per second." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Each second Speed will " & _
                 "be increased on this value" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "untill it reach MaxSpeed")
         '
+        'NumericUpDown6
+        '
+        Me.NumericUpDown6.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.ASCOM.Focuser.My.MySettings.Default, "StepperRPM", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.NumericUpDown6.Increment = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.NumericUpDown6.Location = New System.Drawing.Point(109, 12)
+        Me.NumericUpDown6.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.NumericUpDown6.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.NumericUpDown6.Name = "NumericUpDown6"
+        Me.NumericUpDown6.Size = New System.Drawing.Size(55, 20)
+        Me.NumericUpDown6.TabIndex = 20
+        Me.NumericUpDown6.Value = Global.ASCOM.Focuser.My.MySettings.Default.StepperRPM
+        '
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.WhiteSmoke
@@ -356,80 +434,6 @@ Partial Class SetupDialogForm
         Me.TabPage3.Size = New System.Drawing.Size(358, 173)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Not Used"
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(15, 75)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(62, 13)
-        Me.Label13.TabIndex = 26
-        Me.Label13.Text = "Step Config"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.ASCOM.Focuser.My.MySettings.Default, "SSize", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"1", "2", "4", "8", "16", "32"})
-        Me.ComboBox1.Location = New System.Drawing.Point(109, 72)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(55, 21)
-        Me.ComboBox1.TabIndex = 27
-        Me.ComboBox1.Text = Global.ASCOM.Focuser.My.MySettings.Default.SSize
-        Me.ToolTip1.SetToolTip(Me.ComboBox1, "StepDriver microstep config")
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(85, 75)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(18, 13)
-        Me.Label14.TabIndex = 28
-        Me.Label14.Text = "1/"
-        '
-        'COM1
-        '
-        Me.COM1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.ASCOM.Focuser.My.MySettings.Default, "CommPort", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.COM1.FormattingEnabled = True
-        Me.COM1.Location = New System.Drawing.Point(109, 12)
-        Me.COM1.Name = "COM1"
-        Me.COM1.Size = New System.Drawing.Size(67, 21)
-        Me.COM1.TabIndex = 22
-        Me.COM1.Text = Global.ASCOM.Focuser.My.MySettings.Default.CommPort
-        '
-        'NumericUpDown1
-        '
-        Me.NumericUpDown1.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.ASCOM.Focuser.My.MySettings.Default, "FocuserMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.NumericUpDown1.Location = New System.Drawing.Point(109, 43)
-        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(67, 20)
-        Me.NumericUpDown1.TabIndex = 8
-        Me.NumericUpDown1.Value = Global.ASCOM.Focuser.My.MySettings.Default.FocuserMax
-        '
-        'NumericUpDown3
-        '
-        Me.NumericUpDown3.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.ASCOM.Focuser.My.MySettings.Default, "Acceleration", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.NumericUpDown3.Increment = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.NumericUpDown3.Location = New System.Drawing.Point(108, 43)
-        Me.NumericUpDown3.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.NumericUpDown3.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.NumericUpDown3.Name = "NumericUpDown3"
-        Me.NumericUpDown3.Size = New System.Drawing.Size(55, 20)
-        Me.NumericUpDown3.TabIndex = 25
-        Me.NumericUpDown3.Value = Global.ASCOM.Focuser.My.MySettings.Default.Acceleration
-        '
-        'NumericUpDown6
-        '
-        Me.NumericUpDown6.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.ASCOM.Focuser.My.MySettings.Default, "StepperRPM", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.NumericUpDown6.Increment = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.NumericUpDown6.Location = New System.Drawing.Point(109, 12)
-        Me.NumericUpDown6.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
-        Me.NumericUpDown6.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.NumericUpDown6.Name = "NumericUpDown6"
-        Me.NumericUpDown6.Size = New System.Drawing.Size(55, 20)
-        Me.NumericUpDown6.TabIndex = 20
-        Me.NumericUpDown6.Value = Global.ASCOM.Focuser.My.MySettings.Default.StepperRPM
         '
         'NumericUpDown4
         '
@@ -450,6 +454,27 @@ Partial Class SetupDialogForm
         Me.NumericUpDown2.Size = New System.Drawing.Size(55, 20)
         Me.NumericUpDown2.TabIndex = 30
         Me.NumericUpDown2.Value = Global.ASCOM.Focuser.My.MySettings.Default.DutyCycle
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(15, 105)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(70, 13)
+        Me.Label15.TabIndex = 38
+        Me.Label15.Text = "Show Control"
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = Global.ASCOM.Focuser.My.MySettings.Default.ShowControlBox
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.ASCOM.Focuser.My.MySettings.Default, "ShowControlBox", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.CheckBox1.Location = New System.Drawing.Point(109, 105)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(15, 14)
+        Me.CheckBox1.TabIndex = 39
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'SetupDialogForm
         '
@@ -477,13 +502,13 @@ Partial Class SetupDialogForm
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
-        Me.TabPage3.ResumeLayout(False)
-        Me.TabPage3.PerformLayout()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown6, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         CType(Me.NumericUpDown4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -527,5 +552,7 @@ Partial Class SetupDialogForm
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents NumericUpDown3 As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents Label15 As System.Windows.Forms.Label
 
 End Class

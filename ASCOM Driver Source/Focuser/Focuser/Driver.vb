@@ -2,7 +2,7 @@
 'tabs=4
 ' --------------------------------------------------------------------------------
 ' ASCOM Focuser driver for Focuser
-' Implements:	ASCOM Focuser interface version: 0.1
+' Implements:	ASCOM Focuser interface version: 0.3
 ' Author:		hippie (v.v.gura@gmail.com)
 ' Your driver's ID is ASCOM.Focuser.Focuser
 #Const Device = "Focuser"
@@ -21,7 +21,7 @@ Public Class Focuser
     ' Driver ID and descriptive string that shows in the Chooser
     '
     Private Const DELTA_T As Double = 0.5
-    Private Const DRIVER_VERSION As String = "0.1"
+    Private Const DRIVER_VERSION As String = "0.3"
     Private Const DEVICE_RESPONSE As String = "Arduino.Open.Focuser"
 
     Private Shared driverID As String = "ASCOM.Focuser.Focuser"
@@ -250,6 +250,16 @@ Public Class Focuser
         Catch ex As ASCOM.NotConnectedException When (ex.Message = "Temperature sensor disconnected")
             sensorConnected = False
         End Try
+
+        
+
+        If (My.Settings.ShowControlBox = True) Then
+            fcsr = Me
+            Dim controllForm As New Form2
+            controllForm.Show()
+        End If
+
+
     End Sub
 
 
@@ -277,9 +287,7 @@ Public Class Focuser
             Throw New ASCOM.NotConnectedException("Unable to write StepSize parameter to focuser")
         End If
 
-        fcsr = Me
-        Dim controllForm As New Form2
-        controllForm.Show()
+
         'answer = CommandString("X " + My.Settings.FocuserMax.ToString)
         'If (answer <> "X") Then
         'Throw New ASCOM.NotConnectedException("Unable to write initial parameter X to device")
